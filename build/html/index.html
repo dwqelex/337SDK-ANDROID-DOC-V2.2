@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>337SDK集成文档 &mdash; 337SDK-Android-V2.2 2.2 文档</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="337SDK-Android-V2.2 2.2 文档" href="#" />
+    <link rel="next" title="引入依赖工程" href="quickstart.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="quickstart.html" title="引入依赖工程"
+             accesskey="N">下一页</a> |</li>
+        <li><a href="#">337SDK-Android-V2.2 2.2 文档</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">內容目录</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">337SDK集成文档</a><ul>
+<li><a class="reference internal" href="#id1">快速集成</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">用户登录模块集成</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">移动支付集成</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">337移动支付服务端回调及验证说明</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">第三方广告及统计SDK</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">用户反馈</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>下一个主题</h4>
+  <p class="topless"><a href="quickstart.html"
+                        title="下一章">引入依赖工程</a></p>
+  <h3>本页</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">显示源代码</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>快速搜索</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="转向" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    输入相关的术语，模块，类或者函数名称进行搜索
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sdk">
+<h1>337SDK集成文档<a class="headerlink" href="#sdk" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>快速集成<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">引入依赖工程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id2">添加权限</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#activitymetadata">添加Activity、MetaData和其他内容</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#sdk">添加第三方广告推广平台SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id3">SDK初始化以及重载关键方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id4">接入用户系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id5">设置角色和服信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id6">加入行云统计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id7">打开浮动窗口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id8">支付初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html#id9">展示套餐</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>用户登录模块集成<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userlogin.html">在应用中引入lib工程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userlogin.html#manifest">在Manifest文件添加必要的声明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userlogin.html#id1">获取用户信息</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userlogin.html#id2">自定义用户登录界面</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userlogin.html#id3">其他方法</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>移动支付集成<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="payment.html">玩家支付流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payment.html#id2">准备工作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payment.html#lib">在应用中引入lib工程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payment.html#manifest">在Manifest文件添加必要的声明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payment.html#paycore">初始化PayCore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payment.html#id3">支付准备</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payment.html#id4">发起支付</a></li>
+<li class="toctree-l1"><a class="reference internal" href="payment.html#id5">其他说明</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>337移动支付服务端回调及验证说明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="server.html">概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server.html#id2">回调环节</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server.html#id3">安全验证</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>第三方广告及统计SDK<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html">已经集成的SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#lib">在应用中引入lib工程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#id1">开始集成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#tapjoy">集成Tapjoy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#facebook">集成Facebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#chartboost">集成Chartboost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#google-analytics">集成Google Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#hasoffers">集成hasoffers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#fiksu">集成FIKSU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#id2">自定义初始化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="othersdk.html#id3">其他方法</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>用户反馈<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ticket.html">在应用中引入lib工程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ticket.html#manifest">在Manifest文件添加必要的声明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ticket.html#id1">使用用户反馈功能</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="quickstart.html" title="引入依赖工程"
+             >下一页</a> |</li>
+        <li><a href="#">337SDK-Android-V2.2 2.2 文档</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; 版权所有 2014, web337.
+      由 <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3 创建。
+    </div>
+  </body>
+</html>
