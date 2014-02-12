@@ -20,6 +20,7 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 
 	<!-- 涉及GoogelPlay内购功能 -->
 	<uses-permission android:name="com.android.vending.BILLING" />
@@ -27,6 +28,9 @@
 	<!-- 涉及手机短信付款功能 -->
 	<uses-permission android:name="android.permission.RECEIVE_SMS" />
 	<uses-permission android:name="android.permission.SEND_SMS" />
+
+	<uses-permission android:name="com.tmoney.vending.INBILLING"/> 
+	<permission android:name="com.tmoney.vending.INBILLING"/>
  
 添加Activity、MetaData和其他内容 
 --------------------------------
@@ -77,6 +81,11 @@
         <activity
             android:name="com.facebook.LoginActivity"
             android:theme="@android:style/Theme.Translucent" />
+        <activity 
+            android:name="com.skplanet.dodo.IapWeb"
+            android:configChanges="orientation|keyboardHidden|locale|screenSize|layoutDirection"
+            android:excludeFromRecents="true" 
+            android:windowSoftInputMode="stateHidden"/>
         <receiver
             android:name="com.web337.android.Tracker"
             android:exported="true" >
@@ -97,6 +106,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="\ 220782057940018" />
+        <meta-data android:name="iap:api_version" android:value="1"/> 
 		
 *screenSize添加时如果出现错误，请更改targetSdkVersion为13以上即可*
 
@@ -121,18 +131,21 @@ SDK初始化以及重载关键方法
 		@Override
 		protected void onDestroy() {
 			FuncCore.onDestroy(this);
+			/*your code*/
 			super.onDestroy();
 		}
 
 		@Override
 		protected void onStart() {
 			FuncCore.onStart(this);
+			/*your code*/
 			super.onStart();
 		}
 
 		@Override
 		protected void onStop() {
 			FuncCore.onStop(this);
+			/*your code*/
 			super.onStop();
 		}
 
@@ -141,38 +154,65 @@ SDK初始化以及重载关键方法
 			if (FuncCore.onBackPressed(this)) {
 				return;
 			} else {
+				/*your code*/
 				super.onBackPressed();
 			}
 		}
+
+设置支付回调
+------------
+ ::
+
+	FuncCore.setPayCallback(new FuncCore.PayCallback() {
+				
+		@Override
+		public void onInitFinish(Msg msg) {
+			if(msg.isSuccess()){
+				/*初始化成功*/
+			}else{
+				/*初始化失败*/
+			}
+		}
+			
+		@Override
+		public void onComplete(Order o) {
+			/*付款成功*/
+		}
+		@Override
+		public void onCancel() {
+			/*取消支付*/
+		}
+		@Override
+		public void onFailed(Msg msg) {
+			/*支付失败*/
+		}
+	});
 		
-接入用户系统
+用户登录
 ------------
 *  实例化一个回调对象： ::
 	
-		final UserLoginCallback callback = new UserLoginCallback(){
+		final FuncCore.LoginCallback callback = new FuncCore.LoginCallback(){
+			@Override
+			public void onLoginSuccess(User u, boolean isRegist) {
+				if(isRegist){
+					/*注册成功*/
+				}else{
+					/*登录成功*/
+				}
+			}
+					
 			@Override
 			public void onCancel() {
-				alert("取消登录");
-			}
-
-			@Override
-			public void onLoginSuccess(User user, boolean isregister) {
-				
-				//成功后可以显示一个欢迎提示，玩家可以在此切换账号
-				UserCore.showWelcome(YourActivity.this);//【可选功能】
-				if(isregister){
-					alert("注册成功"+user.getUid());
-				}else{
-					alert("登录成功"+user.getUid());
-				}
+				/*取消登录*/
 			}
 		};
 		
-*  调用checkLogin方法： ::
+*  调用登录方法： ::
+		
+		FuncCore.goLoginAndInit(Context c, FuncCore.LoginCallback callback,final boolean priorityLogin);
 
-		com.web337.android.user.UserCore.checkLogin(Context c, UserLoginCallback callback)
-
-*可以在进入游戏主页面后直接调用，Context传递当前的activity即可，UserLoginCallback传递上一步创建的callback对象*
+*可以在进入游戏主页面后直接调用，Context传递当前的activity即可，LoginCallback传递上一步创建的callback对象*
 
 **调用该方法后只需要关心callback中的两个回调方法即可，若当前无登录用户，则会弹出登录或注册页面，用户登录或注册完成后，会回调。若已经有登录的用户，则直接回调**
 
@@ -202,46 +242,22 @@ Context传递当前Activity即可
 进入游戏主面板后，打开337的浮动窗口: ::
 
 		FuncCore.showFloatWindow(activity);
-			
-支付初始化
-----------
 
-示例代码如下: ::
 
-		//支付Id请联系运营申请
-		String appid = "xxx@android_tw_1";
-		PayCore.init(context, appid, new PayCallback(){
-			@Override
-			public void onCancel() {
-				alert("取消支付");
-			}
+直接发起支付
+--------
+ ::
 
-			@Override
-			public void onComplete(Order o) {
-				/*
-				 * 支付完成表明玩家付款成功，但并不表明支付中心回调游戏服务端是成功的
-				 */
-				alert("支付完成。"+o.getTransid());
-			}
+		Order o = new Order();
+		o.setAmount(游戏币数量);
+		o.setDescription(商品描述);
+		o.setGross(商品金额);
+		o.setCurrency(货币类型);
+		o.setProductId(商品代码);
+		PayCore.beginPay(activity, o);
 
-			@Override
-			public void onFailed(Msg msg) {
-				alert("支付失败。"+msg.getMsg());
-			}
 
-			@Override
-			public void onInitFinish(Msg msg) {
-				if(msg.isSuccess()){
-					alert("初始化完成。");
-				}else{
-					//初始化出错后，不能调用发起支付的方法
-					alert("初始化出错。"+msg.getMsg());
-				}
-		}});
-	
-**初始化涉及网络操作，不建议将此步骤放在用户点击商城的时候**
-
-展示套餐
+展示支付套餐
 --------
 
 需要如下三个步骤: ::
